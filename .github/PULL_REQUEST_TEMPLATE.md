@@ -29,9 +29,10 @@ _List the issues related to this PR, using the syntax `Fixes #issue_number`._
 ### Screenshots (if applicable)
 
 _Include any screenshots that might help reviewers understand the context of the changes._
+|Table Title 1|Table Title 2|
+|-------------|-------------|
+|Table Content|Table Content|
 
 ### Additional Notes
 
 _Add any other relevant information or context._
-
-### Demo(Screenshots)
