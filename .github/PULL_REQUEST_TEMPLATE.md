@@ -1,10 +1,10 @@
 ### Description
 
-_Please include a summary of the change and which issue is fixed. Please also include relevant motivation and context._
+<!-- Please include a summary of the change and which issue is fixed. Please also include relevant motivation and context. -->
 
 ### Type of change
 
-_Select the type of change:_
+<!-- Select the type of change: -->
 
 - [ ] [fix] Bug fix (non-breaking change which fixes an issue)
 - [ ] [feat] New feature (non-breaking change which adds functionality)
@@ -19,7 +19,7 @@ _Select the type of change:_
 
 ### Checklist
 
-_Please mark the tasks that you completed:_
+<!-- Please mark the tasks that you completed: -->
 
 - [ ] My code follows the style guidelines of this project
 - [ ] I have performed a self-review of my code
@@ -30,7 +30,7 @@ _Please mark the tasks that you completed:_
 
 ### Linked Issues
 
-_List the issues related to this PR, using the syntax `Fixes #issue_number`._
+<!-- List the issues related to this PR, using the syntax `Fixes #issue_number`. -->
 
 ### Screenshots (if applicable)
 
@@ -41,4 +41,4 @@ _Include any screenshots that might help reviewers understand the context of the
 
 ### Additional Notes
 
-_Add any other relevant information or context._
+<!-- Add any other relevant information or context. -->
