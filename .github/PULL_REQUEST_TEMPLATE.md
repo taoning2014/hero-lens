@@ -34,10 +34,12 @@
 
 ### Screenshots (if applicable)
 
-_Include any screenshots that might help reviewers understand the context of the changes._
+<!--
+Include any screenshots that might help reviewers understand the context of the changes.
 |Table Title 1|Table Title 2|
 |-------------|-------------|
 |Table Content|Table Content|
+-->
 
 ### Additional Notes
 
