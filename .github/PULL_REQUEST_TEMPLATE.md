@@ -6,10 +6,16 @@ _Please include a summary of the change and which issue is fixed. Please also in
 
 _Select the type of change:_
 
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
-- [ ] Documentation update
+- [ ] [fix] Bug fix (non-breaking change which fixes an issue)
+- [ ] [feat] New feature (non-breaking change which adds functionality)
+- [ ] [chore] Changes that do not relate to a fix or feature and don't modify src or test files (for example updating dependencies)
+- [ ] [docs] Updates to documentation such as a the README or other markdown files
+- [ ] [perf] Performance improvements
+- [ ] [refactor] Refactored code that neither fixes a bug nor adds a feature
+- [ ] [style] Changes that do not affect the meaning of the code, likely related to code formatting such as white-space, missing semi-colons, and so on.
+- [ ] [test] Including new or correcting previous tests
+- [ ] [revert] Reverts a previous commit
+- [ ] [build] Changes that affect the build system or external or continuous integration related
 
 ### Checklist
 
