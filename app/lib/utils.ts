@@ -93,7 +93,20 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
   ];
 };
 
-export const monthToNumber = (str: string) => {
+type Month =
+  | "Jan"
+  | "Feb"
+  | "Mar"
+  | "Apr"
+  | "May"
+  | "Jun"
+  | "Jul"
+  | "Aug"
+  | "Sep"
+  | "Oct"
+  | "Nov"
+  | "Dec";
+export const monthToNumber = (str: Month) => {
   const monthToNumber = {
     Jan: 1,
     Feb: 2,
