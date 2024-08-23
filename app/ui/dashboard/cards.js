@@ -1,37 +1,33 @@
 import { fetchCardData } from "@/app/lib/data";
 import {
-  BanknotesIcon,
+  AdjustmentsHorizontalIcon,
+  CircleStackIcon,
   ClockIcon,
-  UserGroupIcon,
-  InboxIcon,
+  RocketLaunchIcon,
 } from "@heroicons/react/24/outline";
 import { lusitana } from "@/app/ui/fonts";
+import { formatDateAndTimeToLocal } from "@/app/lib/utils";
 
 const iconMap = {
-  collected: BanknotesIcon,
-  customers: UserGroupIcon,
-  pending: ClockIcon,
-  invoices: InboxIcon,
+  circleStack: CircleStackIcon,
+  rocketLaunch: RocketLaunchIcon,
+  clock: ClockIcon,
+  adjustments: AdjustmentsHorizontalIcon,
 };
 
 export default async function CardWrapper() {
-  const {
-    numberOfInvoices,
-    numberOfCustomers,
-    totalPaidInvoices,
-    totalPendingInvoices,
-  } = await fetchCardData();
+  const { modelSize, epoch, trainedAt, splitAt } = await fetchCardData();
 
   return (
     <>
-      <Card title="Collected" value={totalPaidInvoices} type="collected" />
-      <Card title="Pending" value={totalPendingInvoices} type="pending" />
-      <Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
+      <Card title="Model Size" value={modelSize} type="circleStack" />
+      <Card title="Epoch" value={epoch} type="rocketLaunch" />
       <Card
-        title="Total Customers"
-        value={numberOfCustomers}
-        type="customers"
+        title="Trained At"
+        value={formatDateAndTimeToLocal(trainedAt)}
+        type="clock"
       />
+      <Card title="Split" value={splitAt} type="adjustments" />
     </>
   );
 }
@@ -47,7 +43,7 @@ export function Card({ title, value, type }) {
       </div>
       <p
         className={`${lusitana.className}
-          truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
+          truncate rounded-xl bg-white px-4 py-8 text-center text-lg`}
       >
         {value}
       </p>

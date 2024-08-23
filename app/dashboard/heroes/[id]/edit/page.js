@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Form from "@/app/ui/invoices/edit-form";
 
 export const metadata = {
-  title: "Edit Invoice",
+  title: "Hero Lens | Edit Hero",
 };
 
 export default async function Page({ params }) {
@@ -22,10 +22,10 @@ export default async function Page({ params }) {
     <main>
       <Breadcrumbs
         breadcrumbs={[
-          { label: "Invoices", href: "/dashboard/invoices" },
+          { label: "Hero Lens", href: "/dashboard/heroes" },
           {
-            label: "Edit Invoice",
-            href: `/dashboard/invoices/${id}/edit`,
+            label: "Edit Hero",
+            href: `/dashboard/heroes/${id}/edit`,
             active: true,
           },
         ]}

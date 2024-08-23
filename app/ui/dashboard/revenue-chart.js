@@ -1,13 +1,7 @@
-import { generateYAxis } from "@/app/lib/utils";
+import { generateYAxis, monthToNumber } from "@/app/lib/utils";
 import { CalendarIcon } from "@heroicons/react/24/outline";
 import { lusitana } from "@/app/ui/fonts";
 import { fetchRevenue } from "@/app/lib/data";
-
-// This component is representational only.
-// For data visualization UI, check out:
-// https://www.tremor.so/
-// https://www.chartjs.org/
-// https://airbnb.io/visx/
 
 export default async function RevenueChart() {
   const revenue = await fetchRevenue();
@@ -21,7 +15,7 @@ export default async function RevenueChart() {
   return (
     <div className="w-full md:col-span-4">
       <h2 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
-        Recent Revenue
+        Loss Chart
       </h2>
       <div className="rounded-xl bg-gray-50 p-4">
         <div className="mt-0 grid grid-cols-12 items-end gap-2 rounded-md bg-white p-4 sm:grid-cols-13 md:gap-4">
@@ -43,14 +37,14 @@ export default async function RevenueChart() {
                 }}
               ></div>
               <p className="-rotate-90 text-sm text-gray-400 sm:rotate-0">
-                {month.month}
+                {monthToNumber(month.month)}
               </p>
             </div>
           ))}
         </div>
         <div className="flex items-center pb-2 pt-6">
           <CalendarIcon className="h-5 w-5 text-gray-500" />
-          <h3 className="ml-2 text-sm text-gray-500 ">Last 12 months</h3>
+          <h3 className="ml-2 text-sm text-gray-500 ">Time</h3>
         </div>
       </div>
     </div>

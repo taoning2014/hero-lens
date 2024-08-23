@@ -5,7 +5,11 @@ import { lusitana } from "@/app/ui/fonts";
 import { InvoicesTableSkeleton } from "@/app/ui/skeletons";
 import { Suspense } from "react";
 import { fetchInvoicesPages } from "@/app/lib/data";
-import { CreateInvoice } from "@/app/ui/invoices/buttons";
+import { UploadHeroes } from "@/app/ui/invoices/buttons";
+
+export const metadata = {
+  title: "Hero Lens | Uploader",
+};
 
 export default async function Page({ searchParams }) {
   const query = searchParams?.query || "";
@@ -15,12 +19,18 @@ export default async function Page({ searchParams }) {
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
-        <h1 className={`${lusitana.className} text-2xl`}>Invoices</h1>
+        <h1 className={`${lusitana.className} text-2xl`}>
+          🚀 Upload Hero here and Hero Lens will help you recogianize which hero
+          it is 🔍
+        </h1>
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-        <Search placeholder="Search invoices..." />
-        <CreateInvoice />
+        <Search placeholder="Search uploaded heroes..." />
+        <UploadHeroes />
       </div>
+      <h2 className={`${lusitana.className} mb-4 mt-4 text-l md:text-xl`}>
+        Here is a list of the heros others have uploaded
+      </h2>
       <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
         <Table query={query} currentPage={currentPage} />
       </Suspense>

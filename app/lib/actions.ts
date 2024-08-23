@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 
 const FormSchema = z.object({
   id: z.string(),
+  hero: z.string(),
   customerId: z.string({
     invalid_type_error: "Please select a customer.",
   }),
@@ -33,6 +34,7 @@ export type State = {
   };
   message?: string | null;
 };
+
 export async function createInvoice(prevState: State, formData: FormData) {
   // Validate form fields using Zod
   const validatedFields = CreateInvoice.safeParse({
@@ -64,8 +66,8 @@ export async function createInvoice(prevState: State, formData: FormData) {
     };
   }
 
-  revalidatePath("/dashboard/invoices");
-  redirect("/dashboard/invoices");
+  revalidatePath("/dashboard/heroes");
+  redirect("/dashboard/heroes");
 }
 
 export async function updateInvoice(
@@ -75,7 +77,7 @@ export async function updateInvoice(
 ) {
   const validatedFields = UpdateInvoice.safeParse({
     customerId: formData.get("customerId"),
-    amount: formData.get("amount"),
+    hero: formData.get("hero"),
     status: formData.get("status"),
   });
 
@@ -86,27 +88,26 @@ export async function updateInvoice(
     };
   }
 
-  const { customerId, amount, status } = validatedFields.data;
-  const amountInCents = amount * 100;
+  const { customerId, hero, status } = validatedFields.data;
 
   try {
     await sql`
       UPDATE invoices
-      SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status}
+      SET customer_id = ${customerId}, hero = ${hero}, status = ${status}
       WHERE id = ${id}
     `;
   } catch (error) {
     return { message: "Database Error: Failed to Update Invoice." };
   }
 
-  revalidatePath("/dashboard/invoices");
-  redirect("/dashboard/invoices");
+  revalidatePath("/dashboard/heroes");
+  redirect("/dashboard/heroes");
 }
 
 export async function deleteInvoice(id: string) {
   try {
     await sql`DELETE FROM invoices WHERE id = ${id}`;
-    revalidatePath("/dashboard/invoices");
+    revalidatePath("/dashboard/heroes");
     return { message: "Deleted Invoice." };
   } catch (error) {
     return { message: "Database Error: Failed to Delete Invoice." };

@@ -58,7 +58,7 @@ export default async function InvoicesTable({ query, currentPage }) {
                   Email
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Amount
+                  Hero
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Date
@@ -93,7 +93,7 @@ export default async function InvoicesTable({ query, currentPage }) {
                     {invoice.email}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {formatCurrency(invoice.amount)}
+                    {invoice.hero}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {formatDateToLocal(invoice.date)}

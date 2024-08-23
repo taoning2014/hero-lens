@@ -17,24 +17,47 @@ export const generateYAxis = (revenue: Revenue[]) => {
   const topLabel = Math.ceil(highestRecord / 1000) * 1000;
 
   for (let i = topLabel; i >= 0; i -= 1000) {
-    yAxisLabels.push(`$${i / 1000}K`);
+    yAxisLabels.push(`${i / 1000}.0`);
   }
 
   return { yAxisLabels, topLabel };
 };
 
 export const formatDateToLocal = (
-  dateStr: string,
+  date: string | Date,
   locale: string = "en-US"
 ) => {
-  const date = new Date(dateStr);
-  const options: Intl.DateTimeFormatOptions = {
+  return _formatDateToLocal(date, locale, {
     day: "numeric",
     month: "short",
     year: "numeric",
-  };
+  });
+};
+
+export const formatDateAndTimeToLocal = (
+  date: string | Date,
+  locale: string = "en-US"
+) => {
+  return _formatDateToLocal(date, locale, {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  });
+};
+
+export const _formatDateToLocal = (
+  date: string | Date,
+  locale: string = "en-US",
+  options: Intl.DateTimeFormatOptions
+) => {
+  const dateObj = date instanceof Date ? date : new Date(date);
+  // const date = new Date(dateStr);
+
   const formatter = new Intl.DateTimeFormat(locale, options);
-  return formatter.format(date);
+  return formatter.format(dateObj);
 };
 
 export const generatePagination = (currentPage: number, totalPages: number) => {
@@ -68,4 +91,23 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     "...",
     totalPages,
   ];
+};
+
+export const monthToNumber = (str: string) => {
+  const monthToNumber = {
+    Jan: 1,
+    Feb: 2,
+    Mar: 3,
+    Apr: 4,
+    May: 5,
+    Jun: 6,
+    Jul: 7,
+    Aug: 8,
+    Sep: 9,
+    Oct: 10,
+    Nov: 11,
+    Dec: 12,
+  };
+
+  return `${monthToNumber[str] + 10}s`;
 };
