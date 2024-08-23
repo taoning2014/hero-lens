@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.7",
     "@vercel/postgres": "^0.9.0",
     "clsx": "^2.0.0",
+    "landingai": "^1.0.24",
+    "landingai-react": "^1.0.24",
     "next": "14.2.5",
     "react": "^18.3.1",
     "react-dom": "^18",

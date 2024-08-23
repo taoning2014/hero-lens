@@ -2,6 +2,10 @@ import Form from "@/app/ui/invoices/create-form";
 import Breadcrumbs from "@/app/ui/invoices/breadcrumbs";
 import { fetchCustomers } from "@/app/lib/data";
 
+export const metadata = {
+  title: "Hero Lens | Upload Hero",
+};
+
 export default async function Page() {
   const customers = await fetchCustomers();
 
@@ -9,10 +13,10 @@ export default async function Page() {
     <main>
       <Breadcrumbs
         breadcrumbs={[
-          { label: "Invoices", href: "/dashboard/invoices" },
+          { label: "Hero Lens", href: "/dashboard/heroes" },
           {
-            label: "Create Invoice",
-            href: "/dashboard/invoices/create",
+            label: "Upload Hero",
+            href: "/dashboard/heroes/create",
             active: true,
           },
         ]}

@@ -2,6 +2,10 @@
 
 import { useEffect } from "react";
 
+export const metadata = {
+  title: "Hero Lens | Error",
+};
+
 export default function Error({ error, reset }) {
   useEffect(() => {
     console.error(error);
