@@ -1,6 +1,5 @@
 import { sql } from "@vercel/postgres";
-import { LatestInvoiceRaw, Losschart } from "@/app/lib/definitions";
-import { formatCurrency } from "@/app/lib/utils";
+import { LatestHeroUploads, Losschart } from "@/app/lib/definitions";
 import { unstable_noStore as noStore } from "next/cache";
 
 export async function fetchLosschart() {
@@ -17,25 +16,21 @@ export async function fetchLosschart() {
   }
 }
 
-export async function fetchLatestInvoices() {
+export async function fetchLatestHeroUploads() {
   noStore();
 
   try {
-    const data = await sql<LatestInvoiceRaw>`
-      SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id, hero
-      FROM invoices
-      JOIN customers ON invoices.customer_id = customers.id
-      ORDER BY invoices.date DESC
+    const data = await sql<LatestHeroUploads>`
+      SELECT customers.name, customers.image_url, customers.email, heroes.id, heroes.hero
+      FROM heroes
+      JOIN customers ON heroes.customer_id = customers.id
+      ORDER BY heroes.date DESC
       LIMIT 5`;
 
     // Simulate fetching card data delay to display skeleton loader
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    const latestInvoices = data.rows.map((invoice) => ({
-      ...invoice,
-      amount: formatCurrency(invoice.amount),
-    }));
-    return latestInvoices;
+    return data.rows;
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch the latest invoices.");

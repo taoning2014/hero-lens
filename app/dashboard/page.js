@@ -1,11 +1,11 @@
 import LossChart from "@/app/ui/dashboard/loss-chart";
-import LatestInvoices from "@/app/ui/dashboard/latest-invoices";
+import LatestHeroUploads from "@/app/ui/dashboard/latest-hero-uploads";
 import { lusitana } from "@/app/ui/fonts";
 import { Suspense } from "react";
 import {
   CardsSkeleton,
   LossChartSkeleton,
-  LatestInvoicesSkeleton,
+  LatestHeroUploadsSkeleton,
 } from "@/app/ui/skeletons";
 import CardWrapper from "@/app/ui/dashboard/cards";
 
@@ -30,9 +30,9 @@ export default async function Page() {
         <Suspense fallback={<LossChartSkeleton />}>
           <LossChart />
         </Suspense>
-        <Suspense fallback={<LatestInvoicesSkeleton />}>
-          <LatestInvoices />
-        </Suspense>{" "}
+        <Suspense fallback={<LatestHeroUploadsSkeleton />}>
+          <LatestHeroUploads />
+        </Suspense>
       </div>
     </main>
   );
