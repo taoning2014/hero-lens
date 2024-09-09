@@ -1,6 +1,6 @@
-export type Revenue = {
-  month: string;
-  revenue: number;
+export type Losschart = {
+  time: number;
+  loss_amount: number;
 };
 
 export type LatestInvoice = {
