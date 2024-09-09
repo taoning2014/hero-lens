@@ -14,7 +14,7 @@ export function UploadHeroes() {
   );
 }
 
-export function UpdateInvoice({ id }) {
+export function UpdateHero({ id }) {
   return (
     <Link
       href={`/dashboard/heroes/${id}/edit`}

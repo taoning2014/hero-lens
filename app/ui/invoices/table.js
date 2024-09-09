@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { formatDateToLocal } from "@/app/lib/utils";
 import { fetchFilteredHeroes } from "@/app/lib/data";
-import { UpdateInvoice, DeleteHero } from "@/app/ui/invoices/buttons";
+import { UpdateHero, DeleteHero } from "@/app/ui/invoices/buttons";
 
 export default async function InvoicesTable({ query, currentPage }) {
   const heroes = await fetchFilteredHeroes(query, currentPage);
@@ -36,7 +36,7 @@ export default async function InvoicesTable({ query, currentPage }) {
                     <p>{formatDateToLocal(hero.date)}</p>
                   </div>
                   <div className="flex justify-end gap-2">
-                    <UpdateInvoice id={hero.id} />
+                    <UpdateHero id={hero.id} />
                     <DeleteHero id={hero.id} />
                   </div>
                 </div>
@@ -89,7 +89,7 @@ export default async function InvoicesTable({ query, currentPage }) {
                   <td className="whitespace-nowrap px-3 py-3"></td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
-                      <UpdateInvoice id={hero.id} />
+                      <UpdateHero id={hero.id} />
                       <DeleteHero id={hero.id} />
                     </div>
                   </td>

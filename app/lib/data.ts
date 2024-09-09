@@ -140,30 +140,22 @@ export async function fetchCustomers() {
   }
 }
 
-export async function fetchInvoiceById(id: string) {
+export async function fetchHeroById(id: string) {
   noStore();
 
   try {
     const data = await sql`
       SELECT
-        invoices.id,
-        invoices.customer_id,
-        invoices.amount,
-        invoices.status,
-        invoices.hero
-      FROM invoices
-      WHERE invoices.id = ${id};
+        heroes.id,
+        heroes.customer_id,
+        heroes.hero
+      FROM heroes
+      WHERE heroes.id = ${id};
     `;
 
-    const invoice = data.rows.map((invoice) => ({
-      ...invoice,
-      // Convert amount from cents to dollars
-      amount: invoice.amount / 100,
-    }));
-
-    return invoice[0];
+    return data.rows[0];
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch invoice.");
+    throw new Error("Failed to fetch heroes.");
   }
 }
