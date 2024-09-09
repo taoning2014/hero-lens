@@ -1,12 +1,5 @@
 import { Losschart } from "./definitions";
 
-export const formatCurrency = (amount: number) => {
-  return (amount / 100).toLocaleString("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-};
-
 export const formatDateToLocal = (
   date: string | Date,
   locale: string = "en-US"
@@ -38,8 +31,6 @@ export const _formatDateToLocal = (
   options: Intl.DateTimeFormatOptions
 ) => {
   const dateObj = date instanceof Date ? date : new Date(date);
-  // const date = new Date(dateStr);
-
   const formatter = new Intl.DateTimeFormat(locale, options);
   return formatter.format(dateObj);
 };

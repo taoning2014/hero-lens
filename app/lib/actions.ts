@@ -104,9 +104,9 @@ export async function updateInvoice(
   redirect("/dashboard/heroes");
 }
 
-export async function deleteInvoice(id: string) {
+export async function deleteHero(id: string) {
   try {
-    await sql`DELETE FROM invoices WHERE id = ${id}`;
+    await sql`DELETE FROM heroes WHERE id = ${id}`;
     revalidatePath("/dashboard/heroes");
     return { message: "Deleted Invoice." };
   } catch (error) {
