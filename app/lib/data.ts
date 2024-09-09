@@ -1,19 +1,19 @@
 import { sql } from "@vercel/postgres";
-import { LatestInvoiceRaw, Revenue } from "@/app/lib/definitions";
+import { LatestInvoiceRaw, Losschart } from "@/app/lib/definitions";
 import { formatCurrency } from "@/app/lib/utils";
 import { unstable_noStore as noStore } from "next/cache";
 
-export async function fetchRevenue() {
+export async function fetchLosschart() {
   noStore();
 
   try {
-    const data = await sql<Revenue>`SELECT * FROM revenue`;
+    const data = await sql<Losschart>`SELECT * FROM losschart ORDER BY time`;
     // Simulate fetching card data delay to display skeleton loader
     await new Promise((resolve) => setTimeout(resolve, 800));
     return data.rows;
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch revenue data.");
+    throw new Error("Failed to fetch losschart data.");
   }
 }
 

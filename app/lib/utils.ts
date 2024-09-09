@@ -1,26 +1,10 @@
-import { Revenue } from "./definitions";
+import { Losschart } from "./definitions";
 
 export const formatCurrency = (amount: number) => {
   return (amount / 100).toLocaleString("en-US", {
     style: "currency",
     currency: "USD",
   });
-};
-
-/**
- * Calculate what labels we need to display on the y-axis based on highest
- * record and in 1000s
- */
-export const generateYAxis = (revenue: Revenue[]) => {
-  const yAxisLabels = [];
-  const highestRecord = Math.max(...revenue.map((month) => month.revenue));
-  const topLabel = Math.ceil(highestRecord / 1000) * 1000;
-
-  for (let i = topLabel; i >= 0; i -= 1000) {
-    yAxisLabels.push(`${i / 1000}.0`);
-  }
-
-  return { yAxisLabels, topLabel };
 };
 
 export const formatDateToLocal = (
@@ -91,36 +75,4 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     "...",
     totalPages,
   ];
-};
-
-type Month =
-  | "Jan"
-  | "Feb"
-  | "Mar"
-  | "Apr"
-  | "May"
-  | "Jun"
-  | "Jul"
-  | "Aug"
-  | "Sep"
-  | "Oct"
-  | "Nov"
-  | "Dec";
-export const monthToNumber = (str: Month) => {
-  const monthToNumber = {
-    Jan: 1,
-    Feb: 2,
-    Mar: 3,
-    Apr: 4,
-    May: 5,
-    Jun: 6,
-    Jul: 7,
-    Aug: 8,
-    Sep: 9,
-    Oct: 10,
-    Nov: 11,
-    Dec: 12,
-  };
-
-  return `${monthToNumber[str] + 10}s`;
 };
