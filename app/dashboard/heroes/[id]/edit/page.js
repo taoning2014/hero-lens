@@ -1,7 +1,7 @@
-import Breadcrumbs from "@/app/ui/invoices/breadcrumbs";
+import Breadcrumbs from "@/app/ui/heroes/breadcrumbs";
 import { fetchHeroById, fetchCustomers } from "@/app/lib/data";
 import { notFound } from "next/navigation";
-import Form from "@/app/ui/invoices/edit-form";
+import Form from "@/app/ui/heroes/edit-form";
 
 export const metadata = {
   title: "Hero Lens | Edit Hero",

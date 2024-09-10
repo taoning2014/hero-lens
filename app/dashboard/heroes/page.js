@@ -1,11 +1,11 @@
-import Pagination from "@/app/ui/invoices/pagination";
+import Pagination from "@/app/ui/heroes/pagination";
 import Search from "@/app/ui/search";
-import Table from "@/app/ui/invoices/table";
+import Table from "@/app/ui/heroes/table";
 import { lusitana } from "@/app/ui/fonts";
 import { TableSkeleton } from "@/app/ui/skeletons";
 import { Suspense } from "react";
 import { fetchTotalPages } from "@/app/lib/data";
-import { UploadHeroes } from "@/app/ui/invoices/buttons";
+import { UploadHeroes } from "@/app/ui/heroes/buttons";
 
 export const metadata = {
   title: "Hero Lens | Uploader",
