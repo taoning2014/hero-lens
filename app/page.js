@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import HeroLensLogo from "@/app/ui/hero-lens-logo";
 
 export const metadata = {
   title: "Hero Lens",
@@ -12,11 +13,12 @@ export default function Home() {
     <main className="flex min-h-screen flex-col p-6">
       <div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-500 p-4 md:h-52">
         <Image
+          priority={true}
           src="/banner.jpg"
           width={1200}
           height={240}
           className="block w-full h-full object-cover"
-          alt="Screenshot of the dashboard project showing mobile version"
+          alt="Banner of the home page"
         />
       </div>
       <article className="mt-4 flex grow flex-col gap-4 md:flex-row">
@@ -29,15 +31,7 @@ export default function Home() {
             </Link>
           </p>
         </section>
-        <section className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-          <Image
-            src="/logo.JPG"
-            width={512}
-            height={512}
-            className="block rounded-lg"
-            alt="Screenshot of the dashboard project showing mobile version"
-          />
-        </section>
+        <HeroLensLogo className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12" />
       </article>
     </main>
   );
