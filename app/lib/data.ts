@@ -1,6 +1,5 @@
 import { sql } from "@vercel/postgres";
-import { LatestInvoiceRaw, Losschart } from "@/app/lib/definitions";
-import { formatCurrency } from "@/app/lib/utils";
+import { LatestHeroUploads, Losschart } from "@/app/lib/definitions";
 import { unstable_noStore as noStore } from "next/cache";
 
 export async function fetchLosschart() {
@@ -17,25 +16,21 @@ export async function fetchLosschart() {
   }
 }
 
-export async function fetchLatestInvoices() {
+export async function fetchLatestHeroUploads() {
   noStore();
 
   try {
-    const data = await sql<LatestInvoiceRaw>`
-      SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id, hero
-      FROM invoices
-      JOIN customers ON invoices.customer_id = customers.id
-      ORDER BY invoices.date DESC
+    const data = await sql<LatestHeroUploads>`
+      SELECT customers.name, customers.image_url, customers.email, heroes.id, heroes.hero
+      FROM heroes
+      JOIN customers ON heroes.customer_id = customers.id
+      ORDER BY heroes.date DESC
       LIMIT 5`;
 
     // Simulate fetching card data delay to display skeleton loader
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    const latestInvoices = data.rows.map((invoice) => ({
-      ...invoice,
-      amount: formatCurrency(invoice.amount),
-    }));
-    return latestInvoices;
+    return data.rows;
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch the latest invoices.");
@@ -78,64 +73,52 @@ export async function fetchCardData() {
 }
 
 const ITEMS_PER_PAGE = 6;
-export async function fetchFilteredInvoices(
-  query: string,
-  currentPage: number
-) {
+export async function fetchFilteredHeroes(query: string, currentPage: number) {
   noStore();
 
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
-    const invoices = await sql`
+    const heroes = await sql`
       SELECT
-        invoices.id,
-        invoices.amount,
-        invoices.date,
-        invoices.status,
-        invoices.hero,
+        heroes.id,
+        heroes.date,
+        heroes.hero,
         customers.name,
         customers.email,
         customers.image_url
-      FROM invoices
-      JOIN customers ON invoices.customer_id = customers.id
+      FROM heroes
+      JOIN customers ON heroes.customer_id = customers.id
       WHERE
         customers.name ILIKE ${`%${query}%`} OR
         customers.email ILIKE ${`%${query}%`} OR
-        invoices.amount::text ILIKE ${`%${query}%`} OR
-        invoices.date::text ILIKE ${`%${query}%`} OR
-        invoices.status ILIKE ${`%${query}%`}
-      ORDER BY invoices.date DESC
+        heroes.date::text ILIKE ${`%${query}%`} OR
+        heroes.hero ILIKE ${`%${query}%`}
+      ORDER BY heroes.date DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;
 
-    return invoices.rows;
+    return heroes.rows;
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch invoices.");
+    throw new Error("Failed to fetch heroes.");
   }
 }
 
-export async function fetchInvoicesPages(query: string) {
+export async function fetchTotalPages(query: string) {
   noStore();
 
   try {
     const count = await sql`SELECT COUNT(*)
-    FROM invoices
-    JOIN customers ON invoices.customer_id = customers.id
-    WHERE
-      customers.name ILIKE ${`%${query}%`} OR
-      customers.email ILIKE ${`%${query}%`} OR
-      invoices.amount::text ILIKE ${`%${query}%`} OR
-      invoices.date::text ILIKE ${`%${query}%`} OR
-      invoices.status ILIKE ${`%${query}%`}
+    FROM heroes
+    JOIN customers ON heroes.customer_id = customers.id
   `;
 
     const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
     return totalPages;
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch total number of invoices.");
+    throw new Error("Failed to fetch total number of heroes.");
   }
 }
 
@@ -157,30 +140,22 @@ export async function fetchCustomers() {
   }
 }
 
-export async function fetchInvoiceById(id: string) {
+export async function fetchHeroById(id: string) {
   noStore();
 
   try {
     const data = await sql`
       SELECT
-        invoices.id,
-        invoices.customer_id,
-        invoices.amount,
-        invoices.status,
-        invoices.hero
-      FROM invoices
-      WHERE invoices.id = ${id};
+        heroes.id,
+        heroes.customer_id,
+        heroes.hero
+      FROM heroes
+      WHERE heroes.id = ${id};
     `;
 
-    const invoice = data.rows.map((invoice) => ({
-      ...invoice,
-      // Convert amount from cents to dollars
-      amount: invoice.amount / 100,
-    }));
-
-    return invoice[0];
+    return data.rows[0];
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch invoice.");
+    throw new Error("Failed to fetch heroes.");
   }
 }

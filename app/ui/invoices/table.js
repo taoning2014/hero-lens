@@ -1,48 +1,43 @@
 import Image from "next/image";
-import InvoiceStatus from "@/app/ui/invoices/status";
-import { formatDateToLocal, formatCurrency } from "@/app/lib/utils";
-import { fetchFilteredInvoices } from "@/app/lib/data";
-import { UpdateInvoice, DeleteInvoice } from "@/app/ui/invoices/buttons";
+import { formatDateToLocal } from "@/app/lib/utils";
+import { fetchFilteredHeroes } from "@/app/lib/data";
+import { UpdateHero, DeleteHero } from "@/app/ui/invoices/buttons";
 
 export default async function InvoicesTable({ query, currentPage }) {
-  const invoices = await fetchFilteredInvoices(query, currentPage);
+  const heroes = await fetchFilteredHeroes(query, currentPage);
 
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
           <div className="md:hidden">
-            {invoices?.map((invoice) => (
+            {heroes?.map((hero) => (
               <div
-                key={invoice.id}
+                key={hero.id}
                 className="mb-2 w-full rounded-md bg-white p-4"
               >
                 <div className="flex items-center justify-between border-b pb-4">
                   <div>
                     <div className="mb-2 flex items-center">
                       <Image
-                        src={invoice.image_url}
+                        src={hero.image_url}
                         className="mr-2 rounded-full"
                         width={28}
                         height={28}
-                        alt={`${invoice.name}'s profile picture`}
+                        alt={`${hero.name}'s profile picture`}
                       />
-                      <p>{invoice.name}</p>
+                      <p>{hero.name}</p>
                     </div>
-                    <p className="text-sm text-gray-500">{invoice.email}</p>
+                    <p className="text-sm text-gray-500">{hero.email}</p>
                   </div>
-                  <InvoiceStatus status={invoice.status} />
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
                   <div>
-                    <p className="text-xl font-medium">
-                      {formatCurrency(invoice.amount)}
-                    </p>
-                    <p>{formatDateToLocal(invoice.date)}</p>
+                    <p>{formatDateToLocal(hero.date)}</p>
                   </div>
                   <div className="flex justify-end gap-2">
-                    <UpdateInvoice id={invoice.id} />
-                    <DeleteInvoice id={invoice.id} />
+                    <UpdateHero id={hero.id} />
+                    <DeleteHero id={hero.id} />
                   </div>
                 </div>
               </div>
@@ -63,48 +58,39 @@ export default async function InvoicesTable({ query, currentPage }) {
                 <th scope="col" className="px-3 py-5 font-medium">
                   Date
                 </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Status
-                </th>
                 <th scope="col" className="relative py-3 pl-6 pr-3">
                   <span className="sr-only">Edit</span>
                 </th>
               </tr>
             </thead>
             <tbody className="bg-white">
-              {invoices?.map((invoice) => (
+              {heroes?.map((hero) => (
                 <tr
-                  key={invoice.id}
+                  key={hero.id}
                   className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex items-center gap-3">
                       <Image
-                        src={invoice.image_url}
+                        src={hero.image_url}
                         className="rounded-full"
                         width={28}
                         height={28}
-                        alt={`${invoice.name}'s profile picture`}
+                        alt={`${hero.name}'s profile picture`}
                       />
-                      <p>{invoice.name}</p>
+                      <p>{hero.name}</p>
                     </div>
                   </td>
+                  <td className="whitespace-nowrap px-3 py-3">{hero.email}</td>
+                  <td className="whitespace-nowrap px-3 py-3">{hero.hero}</td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {invoice.email}
+                    {formatDateToLocal(hero.date)}
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    {invoice.hero}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    {formatDateToLocal(invoice.date)}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    <InvoiceStatus status={invoice.status} />
-                  </td>
+                  <td className="whitespace-nowrap px-3 py-3"></td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
-                      <UpdateInvoice id={invoice.id} />
-                      <DeleteInvoice id={invoice.id} />
+                      <UpdateHero id={hero.id} />
+                      <DeleteHero id={hero.id} />
                     </div>
                   </td>
                 </tr>
