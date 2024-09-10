@@ -1,5 +1,5 @@
-import Form from "@/app/ui/invoices/create-form";
-import Breadcrumbs from "@/app/ui/invoices/breadcrumbs";
+import Form from "@/app/ui/heroes/create-form";
+import Breadcrumbs from "@/app/ui/heroes/breadcrumbs";
 import { fetchCustomers } from "@/app/lib/data";
 
 export const metadata = {

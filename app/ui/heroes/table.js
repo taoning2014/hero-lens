@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { formatDateToLocal } from "@/app/lib/utils";
 import { fetchFilteredHeroes } from "@/app/lib/data";
-import { UpdateHero, DeleteHero } from "@/app/ui/invoices/buttons";
+import { UpdateHero, DeleteHero } from "@/app/ui/heroes/buttons";
 
-export default async function InvoicesTable({ query, currentPage }) {
+export default async function HeroesTable({ query, currentPage }) {
   const heroes = await fetchFilteredHeroes(query, currentPage);
 
   return (

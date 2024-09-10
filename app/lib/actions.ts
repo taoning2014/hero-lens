@@ -13,8 +13,7 @@ const FormSchema = z.object({
   }),
   date: z.string(),
 });
-const CreateInvoice = FormSchema.omit({ id: true, date: true });
-const UpdateInvoice = FormSchema.omit({ id: true, date: true });
+const UpdateHeroes = FormSchema.omit({ id: true, date: true });
 
 export type State = {
   errors?: {
@@ -26,7 +25,7 @@ export type State = {
 };
 
 export async function updateHero(id: string, formData: FormData) {
-  const validatedFields = UpdateInvoice.safeParse({
+  const validatedFields = UpdateHeroes.safeParse({
     customerId: formData.get("customerId"),
     hero: formData.get("hero"),
   });
@@ -34,7 +33,7 @@ export async function updateHero(id: string, formData: FormData) {
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: "Missing Fields. Failed to Update Invoice.",
+      message: "Missing Fields. Failed to Update Hero.",
     };
   }
 
@@ -58,8 +57,8 @@ export async function deleteHero(id: string) {
   try {
     await sql`DELETE FROM heroes WHERE id = ${id}`;
     revalidatePath("/dashboard/heroes");
-    return { message: "Deleted Invoice." };
+    return { message: "Deleted Hero." };
   } catch (error) {
-    return { message: "Database Error: Failed to Delete Invoice." };
+    return { message: "Database Error: Failed to Delete Hero." };
   }
 }
