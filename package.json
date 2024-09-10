@@ -9,20 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@heroicons/react": "^2.0.18",
+    "@heroicons/react": "^2.1.4",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.7",
     "@vercel/postgres": "^0.9.0",
+    "bcrypt": "^5.1.1",
     "clsx": "^2.0.0",
     "landingai": "^1.0.24",
     "landingai-react": "^1.0.24",
-    "next": "14.2.5",
-    "react": "^18.3.1",
-    "react-dom": "^18",
+    "next": "15.0.0-canary.56",
+    "next-auth": "^5.0.0-beta.20",
+    "react": "19.0.0-rc-f38c22b244-20240704",
+    "react-dom": "19.0.0-rc-f38c22b244-20240704",
     "use-debounce": "^10.0.3",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/react": "18.3.3",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
