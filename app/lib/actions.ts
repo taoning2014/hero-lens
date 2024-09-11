@@ -28,7 +28,7 @@ export async function authenticate(
 
 const FormSchema = z.object({
   id: z.string(),
-  hero: z.string(),
+  hero: z.string().min(1, "Hero field cannot be empty"),
   customerId: z.string({
     invalid_type_error: "Please select a customer.",
   }),
