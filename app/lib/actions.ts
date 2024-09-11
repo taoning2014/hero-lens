@@ -28,13 +28,18 @@ export async function authenticate(
 
 const FormSchema = z.object({
   id: z.string(),
-  hero: z.string(),
+  hero: z.string().min(1, "Hero field cannot be empty"),
   customerId: z.string({
     invalid_type_error: "Please select a customer.",
   }),
   date: z.string(),
 });
 const UpdateHeroes = FormSchema.omit({ id: true, date: true });
+
+export type ActionState = {
+  message: null | string;
+  errors: Object;
+};
 
 export type State = {
   errors?: {
@@ -45,7 +50,11 @@ export type State = {
   message?: string | null;
 };
 
-export async function updateHero(id: string, formData: FormData) {
+export async function updateHero(
+  id: string,
+  initialState: ActionState,
+  formData: FormData
+) {
   const validatedFields = UpdateHeroes.safeParse({
     customerId: formData.get("customerId"),
     hero: formData.get("hero"),
