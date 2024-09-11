@@ -7,12 +7,15 @@ import {
 import Link from "next/link";
 import { Button } from "@/app/ui/button";
 import { updateHero } from "@/app/lib/actions";
+import { useActionState } from "react";
 
 export default function EditHeroForm({ hero, customers }) {
+  const initialState = { message: null, errors: {} };
   const updateHeroWithId = updateHero.bind(null, hero.id);
+  const [state, formAction] = useActionState(updateHeroWithId, initialState);
 
   return (
-    <form action={updateHeroWithId}>
+    <form action={formAction}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Customer Name */}
         <div className="mb-4">
@@ -59,6 +62,11 @@ export default function EditHeroForm({ hero, customers }) {
               <IdentificationIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
           </div>
+        </div>
+        <div aria-live="polite" aria-atomic="true">
+          {state.message ? (
+            <p className="my-2 text-sm text-red-500">{state.message}</p>
+          ) : null}
         </div>
       </div>
       <div className="mt-6 flex justify-end gap-4">

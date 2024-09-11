@@ -36,6 +36,11 @@ const FormSchema = z.object({
 });
 const UpdateHeroes = FormSchema.omit({ id: true, date: true });
 
+export type ActionState = {
+  message: null | string;
+  errors: Object;
+};
+
 export type State = {
   errors?: {
     customerId?: string[];
@@ -45,7 +50,11 @@ export type State = {
   message?: string | null;
 };
 
-export async function updateHero(id: string, formData: FormData) {
+export async function updateHero(
+  id: string,
+  initialState: ActionState,
+  formData: FormData
+) {
   const validatedFields = UpdateHeroes.safeParse({
     customerId: formData.get("customerId"),
     hero: formData.get("hero"),
