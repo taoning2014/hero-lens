@@ -1,7 +1,11 @@
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
+import Google from "next-auth/providers/google";
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
+  theme: {
+    logo: "https://hero-lens.vercel.app/_next/image?url=%2Flogo.JPG&w=1080&q=75",
+  },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
@@ -15,5 +19,5 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       return true;
     },
   },
-  providers: [GitHub],
+  providers: [GitHub, Google],
 });
