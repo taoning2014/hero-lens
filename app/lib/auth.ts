@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
+import Google from "next-auth/providers/google";
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   theme: {
@@ -18,5 +19,5 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       return true;
     },
   },
-  providers: [GitHub],
+  providers: [GitHub, Google],
 });
