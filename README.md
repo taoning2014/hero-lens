@@ -6,12 +6,9 @@ Summary: I recently completed the Machine Learning Certificate courses from Deep
 
 The name "HeroLens" is a playful nod to LandingAI's product, LandingLens—I hope you catch the humor in the name similarity (both with "lens" in it).
 
-Check out the quick demo below, where I visit my web app at www.herolens.us, download a sample image, and upload it to query the LandingLens API. The model correctly identifies and labels the character as Iron Man.
+Check out the quick demo below, where I visit the web app, download a sample image, and upload it to query the LandingLens API. The model correctly identifies and labels the character as Iron Man.
 
 ![hero-lens-demo](https://github.com/user-attachments/assets/1c3217b0-b1f2-40e9-af4f-dd4cc3e3383c)
-
-
-Or, you can try it out yourself by visiting www.herolens.us. Yes, I even bought a custom domain to make this side project feel more official and serious 😉.
 
 ## Site Logo
 
